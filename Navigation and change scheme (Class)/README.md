@@ -110,22 +110,19 @@ componentDidMount() {
 <ConfigProvider isWebView={true} scheme={this.state.scheme}> 
 ```
 
-***Пишем две главные функции для смены цветовой схемы.***
+***Пишем главную функцию для смены цветовой схемы.***
 
 ```jsx static
 SetScheme( scheme, isChange = false ) {
    const lights = ['bright_light', 'client_light'];
    const isLight = lights.includes( scheme );
-   
-   this.UpdateTheme( isChange ? !isLight : isLight );
-}
+   const isLight = isChange ? !isLight : isLight;
 
-UpdateTheme( isLight ) {
-    this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
-    bridge.send('VKWebAppSetViewSettings', {
+   this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
+   bridge.send('VKWebAppSetViewSettings', {
       'status_bar_style': isLight ? 'dark' : 'light',
       'action_bar_color': isLight ? '#000' : '#ffff'
-    });
+   });
 }
 ```
 
