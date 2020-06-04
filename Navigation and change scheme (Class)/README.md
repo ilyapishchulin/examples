@@ -116,7 +116,7 @@ componentDidMount() {
 SetScheme( scheme, isChange = false ) {
    const lights = ['bright_light', 'client_light'];
    const isLight = lights.includes( scheme );
-   const isLight = isChange ? !isLight : isLight;
+   isLight = isChange ? !isLight : isLight;
 
    this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
    bridge.send('VKWebAppSetViewSettings', {
