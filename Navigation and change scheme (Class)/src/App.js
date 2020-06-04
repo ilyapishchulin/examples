@@ -50,11 +50,8 @@ class App extends React.Component {
     SetScheme( scheme, isChange = false ) {
         const lights = ['bright_light', 'client_light'];
         const isLight = lights.includes( scheme );
-        
-        this.UpdateTheme( isChange ? !isLight : isLight );
-    }
-     
-    UpdateTheme( isLight ) {
+        isLight = isChange ? !isLight : isLight;
+
         this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
 
         bridge.send('VKWebAppSetViewSettings', {
