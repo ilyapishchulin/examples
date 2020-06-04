@@ -49,7 +49,7 @@ goBack = () => {
 goToPage( name ) { // В качестве аргумента принимаем id панели для перехода
   window.history.pushState( { panel: name }, name ); //  Создаём новую запись в истории браузера
   this.setState({ 
-      activePanel: name // Меняем активную панель
+      activePanel: name, // Меняем активную панель
       history: [...this.state.history, name] // Добавляем в массив панель, на которую перешли
   })
 }
@@ -97,7 +97,7 @@ this.state = {
 ```jsx static
 componentDidMount() {
   bridge.subscribe(({ detail: { type, data }}) => {
-    if (type === 'VKWebAppUpdateConfig') { // Получаем тему клиента.
+    if ( type === 'VKWebAppUpdateConfig' ) { // Получаем тему клиента.
       this.SetScheme( data.scheme )
     }
   })
