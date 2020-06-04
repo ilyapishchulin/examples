@@ -1,0 +1,47 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "./",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env PORT=10888 react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "react-hot-loader": "^4.9.0",
+    "react-scripts": "^2.1.8"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.5.1",
+    "@vkontakte/icons": "^1.11.3",
+    "@vkontakte/mvk-mini-apps-scroll-helper": "^1.2.0",
+    "@vkontakte/vk-bridge": "2.2.2",
+    "@vkontakte/vk-miniapps-deploy": "0.0.10",
+    "@vkontakte/vkui": "3.10.0",
+    "babel-eslint": "^9.0.0",
+    "chalk": "^2.4.2",
+    "core-js": "^3.1.4",
+    "eruda": "^1.10.3",
+    "export": "^0.1.337",
+    "gh-pages": "^2.1.1",
+    "git": "^0.1.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "save": "^2.4.0",
+    "yarn": "^1.19.1"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
