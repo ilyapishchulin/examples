@@ -59,7 +59,7 @@ function goToPage( name ) { // В качестве аргумента прини
    onSwipeBack={goBack} // При свайпе выполняется данная функция.
   >
     <Home id="home" goToPage={goToPage}/>
-    <Second id="second" UpdateTheme={UpdateTheme}/>
+    <Second id="second" SetScheme={SetScheme}/>
   </View>
 </ConfigProvider>
 ```
@@ -105,14 +105,14 @@ useEffect(() => {
 ***Пишем две главные функции для смены цветовой схемы.***
 
 ```jsx static
-SetScheme( scheme, isChange = false ) {
+function SetScheme( scheme, isChange = false ) {
    const lights = ['bright_light', 'client_light'];
    const isLight = lights.includes( scheme );
    
    UpdateTheme( isChange ? !isLight : isLight );
 }
 
-UpdateTheme( isLight ) {
+function UpdateTheme( isLight ) {
     SetStateScheme( isLight ? 'bright_light' : 'space_gray' );
     
     bridge.send('VKWebAppSetViewSettings', {
