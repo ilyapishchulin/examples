@@ -50,7 +50,7 @@ class App extends React.Component {
         const lights = ['bright_light', 'client_light'];
         const isLight = lights.includes( scheme );
         
-        UpdateTheme( isChange ? !isLight : isLight );
+        this.UpdateTheme( isChange ? !isLight : isLight );
     }
      
     UpdateTheme( isLight ) {
