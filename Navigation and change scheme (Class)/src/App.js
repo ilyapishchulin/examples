@@ -14,6 +14,7 @@ class App extends React.Component {
         this.state = {
             activePanel: 'home', // Начальная панель.
             history: ['home'],
+            scheme: 'bright_light'
         }
     }
 
@@ -55,6 +56,7 @@ class App extends React.Component {
      
     UpdateTheme( isLight ) {
         this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
+
         bridge.send('VKWebAppSetViewSettings', {
            'status_bar_style': isLight ? 'dark' : 'light',
            'action_bar_color': isLight ? '#000' : '#ffff'
@@ -63,7 +65,7 @@ class App extends React.Component {
     
     render() {
         return(
-            <ConfigProvider isWebView={true}>
+            <ConfigProvider isWebView={true} scheme={this.state.scheme}>
                 <View 
                     activePanel={this.state.activePanel}
                     history={this.state.history}
