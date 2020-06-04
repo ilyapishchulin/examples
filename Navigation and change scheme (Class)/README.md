@@ -3,7 +3,8 @@
 В этом лонгриде расскажу про корректную навигацию и работу с темами.
 
 Сервис для тестов — [клац](https://vk.com/app7251385) <br/>
-Оригинальная статья — [клац](https://vk.com/@iboge-navigation)
+Оригинальная статья — [клац](https://vk.com/@iboge-navigation) <br/>
+Мой вк — [клац](https://vk.com/@iboge)
 
 ## Навигация
 
@@ -24,9 +25,9 @@
 goBack = () => {
   var history = this.state.history;
   
-  if( history.length === 1  ){  // Если в массиве одно значение:
+  if( history.length === 1  ) {  // Если в массиве одно значение:
     bridge.send("VKWebAppClose", {"status": "success"}); // Отправляем bridge на закрытие сервиса.
-  } else if ( history.length > 1 ){  // Если в массиве больше одного значения:
+  } else if ( history.length > 1 ) {  // Если в массиве больше одного значения:
     history.pop() // Удаляем последний элемент в массиве.
     this.setState({ activePanel: history[history.length - 1] }) // Изменяем массив с иторией и меняем активную панель.
   }
