@@ -106,19 +106,16 @@ useEffect(() => {
 
 ```jsx static
 function SetScheme( scheme, isChange = false ) {
-   const lights = ['bright_light', 'client_light'];
-   const isLight = lights.includes( scheme );
-   
-   UpdateTheme( isChange ? !isLight : isLight );
-}
+	const lights = ['bright_light', 'client_light'];
+	const isLight = lights.includes( scheme );
+	const isLight = isChange ? !isLight : isLight;
 
-function UpdateTheme( isLight ) {
-    SetStateScheme( isLight ? 'bright_light' : 'space_gray' );
-    
-    bridge.send('VKWebAppSetViewSettings', {
-      'status_bar_style': isLight ? 'dark' : 'light',
-      'action_bar_color': isLight ? '#000' : '#ffff'
-    });
+	SetStateScheme( isLight ? 'bright_light' : 'space_gray' );
+		 
+	bridge.send('VKWebAppSetViewSettings', {
+		  'status_bar_style': isLight ? 'dark' : 'light',
+		  'action_bar_color': isLight ? '#000' : '#ffff'
+	});
 }
 ```
 
