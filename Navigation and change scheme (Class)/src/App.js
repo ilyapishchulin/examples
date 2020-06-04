@@ -39,8 +39,8 @@ class App extends React.Component {
 
     componentDidMount() {
         bridge.subscribe(({ detail: { type, data }}) => { // Подписываемся на события bridge.
-			if ( type === 'VKWebAppUpdateConfig' ) { // Получаем тему клиента.
-                this.setState({scheme: data.scheme})
+	    if ( type === 'VKWebAppUpdateConfig' ) { // Получаем тему клиента.
+               this.SetScheme( data.scheme )
             }
         })
         // Обработчик события изменения истории браузера для работы навигационных кнопок.
