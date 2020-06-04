@@ -30,11 +30,8 @@ const App = () => {
 	function SetScheme( scheme, isChange = false ) {
 		const lights = ['bright_light', 'client_light'];
 		const isLight = lights.includes( scheme );
-		
-		UpdateTheme( isChange ? !isLight : isLight );
-	}
-	 
-	function UpdateTheme( isLight ) {
+		const isLight = isChange ? !isLight : isLight;
+
 		SetStateScheme( isLight ? 'bright_light' : 'space_gray' );
 		 
 		bridge.send('VKWebAppSetViewSettings', {
