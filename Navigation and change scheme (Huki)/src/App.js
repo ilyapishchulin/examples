@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import connect from '@vkontakte/vk-connect';
+import bridge from '@vkontakte/vk-bridge';
 import View from '@vkontakte/vkui/dist/components/View/View';
 import ConfigProvider from '@vkontakte/vkui/dist/components/ConfigProvider/ConfigProvider';
 import '@vkontakte/vkui/dist/vkui.css';
