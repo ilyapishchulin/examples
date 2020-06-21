@@ -7,8 +7,6 @@ import '@vkontakte/vkui/dist/vkui.css'; // Импортируем css
 import Home from './panels/home.js'
 import Second from './panels/second.js'
 
-const lights = ['bright_light', 'client_light'];
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +14,8 @@ class App extends React.Component {
         this.state = {
             activePanel: 'home', // Начальная панель.
             history: ['home'],
-            scheme: 'bright_light'
+            scheme: 'bright_light',
+	    lights: ['bright_light', 'client_light']
         }
     }
 
@@ -50,7 +49,7 @@ class App extends React.Component {
     }
 
     camelCase( scheme, needChange = false ) {
-        const isLight = lights.includes( scheme );
+        const isLight = this.state.lights.includes( scheme );
         
 	if( needChange ) {
 	   isLight = !isLight;
