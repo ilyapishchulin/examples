@@ -59,7 +59,7 @@ function goToPage( name ) { // В качестве аргумента прини
    onSwipeBack={goBack} // При свайпе выполняется данная функция.
   >
     <Home id="home" goToPage={goToPage}/>
-    <Second id="second" SetScheme={SetScheme}/>
+    <Second id="second"/>
   </View>
 </ConfigProvider>
 ```
@@ -78,10 +78,11 @@ window.addEventListener('popstate', () => goBack());
 
 ## Смена цветовой схемы
 
-***Объявляем новую переменную.***
+***Объявляем новые константы.***
 
 ```jsx static
 const [scheme, SetStateScheme] = useState('bright_light');
+const lights = ['bright_light', 'client_light'];
 ```
 
 ***В useEffect подписываемся на событие получения темы.***
@@ -90,7 +91,7 @@ const [scheme, SetStateScheme] = useState('bright_light');
 useEffect(() => {
   bridge.subscribe(({ detail: { type, data }}) => {
     if ( type === 'VKWebAppUpdateConfig' ) {
-      SetScheme( data.scheme )
+      camelCase( data.scheme )
     }
   });
 }, []);
@@ -105,21 +106,22 @@ useEffect(() => {
 ***Пишем главную функцию для смены цветовой схемы.***
 
 ```jsx static
-function SetScheme( scheme, isChange = false ) {
-	const lights = ['bright_light', 'client_light'];
+function camelCase( scheme, needChange = false ) {
 	const isLight = lights.includes( scheme );
-	isLight = isChange ? !isLight : isLight;
-
+		
+	if( needChange ) {
+ 	    isLight = !isLight;
+	}
 	SetStateScheme( isLight ? 'bright_light' : 'space_gray' );
 		 
 	bridge.send('VKWebAppSetViewSettings', {
-		  'status_bar_style': isLight ? 'dark' : 'light',
-		  'action_bar_color': isLight ? '#000' : '#ffff'
+	    'status_bar_style': isLight ? 'dark' : 'light',
+	    'action_bar_color': isLight ? '#000' : '#fff'
 	});
 }
 ```
 
 ***Меняем цветовую схему по клику на кнопку***
 ```jsx 
-<Button onClick={() => SetScheme( scheme, true )}>Альтернативная тема</Button>
+<Button onClick={() => camelCase( scheme, true )}>Альтернативная тема</Button>
 ```
