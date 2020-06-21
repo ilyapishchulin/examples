@@ -7,6 +7,8 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home';
 import Second from './panels/second';
 
+const lights = ['bright_light', 'client_light'];
+
 const App = () => {
 	const [activePanel, setActivePanel] = useState("home"); // Ставим начальную панель
 	const [history, setHistory] = useState(['home']) // Заносим начальную панель в массив историй.
@@ -27,26 +29,24 @@ const App = () => {
 		}
 	}
 
-	function SetScheme( scheme, isChange = false ) {
-		const lights = ['bright_light', 'client_light'];
+	function camelCase( scheme, needChange = false ) {
 		const isLight = lights.includes( scheme );
 		
-		UpdateTheme( isChange ? !isLight : isLight );
-	}
-	 
-	function UpdateTheme( isLight ) {
+		if( needChange ) {
+		   isLight = !isLight;
+		}
 		SetStateScheme( isLight ? 'bright_light' : 'space_gray' );
 		 
 		bridge.send('VKWebAppSetViewSettings', {
 		   'status_bar_style': isLight ? 'dark' : 'light',
-		   'action_bar_color': isLight ? '#000' : '#ffff'
+		   'action_bar_color': isLight ? '#000' : '#fff'
 		});
 	}
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
 			if ( type === 'VKWebAppUpdateConfig' ) {
-			  SetScheme( data.scheme )
+			  camelCase( data.scheme )
 			}
 		});
 		window.addEventListener('popstate', () => goBack()); // Обработчик события изменения браузерной истории
@@ -60,7 +60,7 @@ const App = () => {
 				onSwipeBack={goBack} // При свайпе выполняется данная функция.
 			>
 				<Home id="home" goToPage={goToPage}/>
-				<Second id="second" SetScheme={SetScheme} scheme={scheme}/>
+				<Second id="second" camelCase={camelCase} scheme={scheme}/>
 			</View>
 		</ConfigProvider>
 	);
