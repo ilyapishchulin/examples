@@ -88,7 +88,8 @@ window.addEventListener('popstate', () => this.goBack());
 
 ```jsx static
 this.state = {
-   scheme: 'bright_light' // Будет по умолчанию.
+   scheme: 'bright_light', // Будет по умолчанию.
+   lights: ['bright_light', 'client_light']
 }
 ```
 
@@ -98,7 +99,7 @@ this.state = {
 componentDidMount() {
   bridge.subscribe(({ detail: { type, data }}) => {
     if ( type === 'VKWebAppUpdateConfig' ) { // Получаем тему клиента.
-      this.SetScheme( data.scheme )
+      this.camelCase( data.scheme )
     }
   })
 }
@@ -113,20 +114,22 @@ componentDidMount() {
 ***Пишем главную функцию для смены цветовой схемы.***
 
 ```jsx static
-SetScheme( scheme, isChange = false ) {
-   const lights = ['bright_light', 'client_light'];
-   const isLight = lights.includes( scheme );
-   isLight = isChange ? !isLight : isLight;
+camelCase( scheme, needChange = false ) {
+  const isLight = this.state.lights.includes( scheme );
+        
+	if( needChange ) {
+	   isLight = !isLight;
+	}
+  this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
 
-   this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
-   bridge.send('VKWebAppSetViewSettings', {
-      'status_bar_style': isLight ? 'dark' : 'light',
-      'action_bar_color': isLight ? '#000' : '#ffff'
-   });
+  bridge.send('VKWebAppSetViewSettings', {
+       'status_bar_style': isLight ? 'dark' : 'light',
+       'action_bar_color': isLight ? '#000' : '#ffff'
+  });
 }
 ```
 
 ***Меняем цветовую схему по клику на кнопку***
 ```jsx 
-<Button onClick={() => this.SetScheme( this.state.scheme, true )}>Альтернативная тема</Button>
+<Button onClick={() => this.camelCase( this.state.scheme, true )}>Альтернативная тема</Button>
 ```
