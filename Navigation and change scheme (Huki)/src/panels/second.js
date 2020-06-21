@@ -17,7 +17,7 @@ const second = props => (
                 marginLeft: '25%'
             }} alt='' src='https://vk.com/sticker/1-16263-256'/>
             <Div>
-                <Button onClick={() => props.SetScheme( props.scheme, true )} size='xl' mode='secondary'>Сменить тему на альтернативную</Button>
+                <Button onClick={() => props.camelCase( props.scheme, true )} size='xl' mode='secondary'>Сменить тему на альтернативную</Button>
             </Div>
     </Panel>
 );
