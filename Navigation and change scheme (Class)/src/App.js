@@ -7,6 +7,8 @@ import '@vkontakte/vkui/dist/vkui.css'; // Импортируем css
 import Home from './panels/home.js'
 import Second from './panels/second.js'
 
+const lights = ['bright_light', 'client_light'];
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -40,18 +42,19 @@ class App extends React.Component {
     componentDidMount() {
         bridge.subscribe(({ detail: { type, data }}) => { // Подписываемся на события bridge.
 	    if ( type === 'VKWebAppUpdateConfig' ) { // Получаем тему клиента.
-               this.SetScheme( data.scheme )
+               this.camelCase( data.scheme );
             }
         })
         // Обработчик события изменения истории браузера для работы навигационных кнопок.
         window.addEventListener('popstate', () => this.goBack());
     }
 
-    SetScheme( scheme, isChange = false ) {
-        const lights = ['bright_light', 'client_light'];
+    camelCase( scheme, needChange = false ) {
         const isLight = lights.includes( scheme );
-        isLight = isChange ? !isLight : isLight;
-
+        
+	if( needChange ) {
+	   isLight = !isLight;
+	}
         this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
 
         bridge.send('VKWebAppSetViewSettings', {
