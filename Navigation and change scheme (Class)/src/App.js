@@ -58,7 +58,7 @@ class App extends React.Component {
 
         bridge.send('VKWebAppSetViewSettings', {
            'status_bar_style': isLight ? 'dark' : 'light',
-           'action_bar_color': isLight ? '#000' : '#ffff'
+           'action_bar_color': isLight ? '#ffffff' : '#191919'
         });
     }
     
