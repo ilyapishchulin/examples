@@ -39,7 +39,7 @@ const App = () => {
 		 
 		bridge.send('VKWebAppSetViewSettings', {
 		   'status_bar_style': isLight ? 'dark' : 'light',
-		   'action_bar_color': isLight ? '#000' : '#fff'
+		   'action_bar_color': isLight ? '#ffffff' : '#191919'
 		});
 	}
 
