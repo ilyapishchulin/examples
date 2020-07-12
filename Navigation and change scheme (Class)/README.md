@@ -115,11 +115,11 @@ componentDidMount() {
 
 ```jsx static
 camelCase( scheme, needChange = false ) {
-  const isLight = this.state.lights.includes( scheme );
+  let isLight = this.state.lights.includes( scheme );
         
-	if( needChange ) {
-	   isLight = !isLight;
-	}
+  if( needChange ) {
+	isLight = !isLight;
+  }
   this.setState({ scheme: isLight ? 'bright_light' : 'space_gray' });
 
   bridge.send('VKWebAppSetViewSettings', {
