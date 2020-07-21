@@ -49,7 +49,7 @@ class App extends React.Component {
     }
 
     camelCase( scheme, needChange = false ) {
-        const isLight = this.state.lights.includes( scheme );
+        let isLight = this.state.lights.includes( scheme );
         
 	if( needChange ) {
 	   isLight = !isLight;
