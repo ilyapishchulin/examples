@@ -30,7 +30,7 @@ const App = () => {
 	}
 
 	function camelCase( scheme, needChange = false ) {
-		const isLight = lights.includes( scheme );
+		let isLight = lights.includes( scheme );
 		
 		if( needChange ) {
 		   isLight = !isLight;
